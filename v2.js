@@ -1,0 +1,1 @@
+(async()=>{try{const files=['v2.part1.txt','v2.part2.txt','v2.part3.txt'];const parts=await Promise.all(files.map(f=>fetch(f+'?v=4').then(r=>{if(!r.ok)throw new Error(f+' '+r.status);return r.text()})));(0,eval)(parts.join(''));}catch(e){console.error('V4 load failed',e);document.querySelector('#story').textContent='游戏加载失败，请刷新页面后重试。';}})();
