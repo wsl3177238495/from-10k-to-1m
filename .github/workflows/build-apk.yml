@@ -1,0 +1,67 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'index.html'
+      - '*.css'
+      - '*.js'
+      - '*.txt'
+      - 'android/**'
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Copy H5 game into Android assets
+        shell: bash
+        run: |
+          rm -rf android/app/src/main/assets
+          mkdir -p android/app/src/main/assets
+          cp index.html android/app/src/main/assets/
+          find . -maxdepth 1 -type f \( -name '*.css' -o -name '*.js' -o -name '*.txt' \) -exec cp {} android/app/src/main/assets/ \;
+          echo 'Bundled assets:'
+          ls -la android/app/src/main/assets
+
+      - name: Build debug APK
+        run: gradle -p android assembleDebug --stacktrace
+
+      - name: Build release APK
+        run: gradle -p android assembleRelease --stacktrace
+
+      - name: Rename APKs
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/debug/app-debug.apk dist/from-10k-to-1m-v1.0.0-debug.apk
+          cp android/app/build/outputs/apk/release/app-release-unsigned.apk dist/from-10k-to-1m-v1.0.0-release-unsigned.apk
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: from-10k-to-1m-debug-apk
+          path: dist/from-10k-to-1m-v1.0.0-debug.apk
+
+      - name: Upload unsigned release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: from-10k-to-1m-release-unsigned-apk
+          path: dist/from-10k-to-1m-v1.0.0-release-unsigned.apk
