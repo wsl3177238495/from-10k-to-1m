@@ -1,0 +1,45 @@
+name: Build TapTap H5 Package
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'v5.css'
+      - 'v5.js'
+      - 'v5.2-fixes.js'
+      - 'v5.part1.txt'
+      - 'v5.part2.txt'
+      - 'v5.part3.txt'
+      - '.github/workflows/build-taptap-h5.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare TapTap H5 package
+        run: |
+          set -e
+          ROOT="from-10k-to-1m-v5.2"
+          mkdir -p "$ROOT"
+          cp index.html style.css v5.css v5.js v5.2-fixes.js v5.part1.txt v5.part2.txt v5.part3.txt "$ROOT"/
+          test -f "$ROOT/index.html"
+          test "$(find "$ROOT" -maxdepth 1 -type f | wc -l)" -eq 8
+          zip -r from-10k-to-1m-v5.2-TapTap-H5.zip "$ROOT"
+          unzip -l from-10k-to-1m-v5.2-TapTap-H5.zip
+
+      - name: Upload TapTap H5 ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: from-10k-to-1m-v5.2-TapTap-H5
+          path: from-10k-to-1m-v5.2-TapTap-H5.zip
+          if-no-files-found: error
+          retention-days: 30
