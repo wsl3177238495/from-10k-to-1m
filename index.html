@@ -1,23 +1,19 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-  <meta name="theme-color" content="#141a22">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>从一万到一百万</title><link rel="stylesheet" href="style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>从一万到一百万</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="v2.css">
 </head>
 <body>
   <main class="game" aria-live="polite">
-    <header><div><p>临川经营志</p><h1>从一万到一百万</h1></div><button id="restart" type="button">重新开始</button></header>
+    <header><div><p>临川经营志 · V4</p><h1>从一万到一百万</h1></div><button id="restart" type="button">重新开始</button></header>
+    <section id="progress" class="progress" aria-label="百万目标进度"></section>
     <section class="meta"><span id="year"></span><strong id="chapter"></strong></section>
     <section id="story" class="story"></section>
     <section id="choices" class="choices"></section>
     <p class="save">进度会自动保留在这台设备中。</p>
   </main>
   <dialog id="start"><form method="dialog"><p>十年经营人生</p><h2>带着一万元，去临川。</h2><div class="intro">你不需要替角色算账。现金、库存、负债、信用、压力与机会，都会在故事背后真实运转；你只需要在每个关口决定，你愿意成为什么样的经营者。</div><label>主角名字<input id="name" maxlength="12" placeholder="输入名字"></label><button id="begin" value="default">进入临川</button></form></dialog>
-  <script src="game.js"></script>
+  <script src="v2.js"></script>
 </body>
 </html>
