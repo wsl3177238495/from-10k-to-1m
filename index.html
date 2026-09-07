@@ -6,14 +6,15 @@
 </head>
 <body>
   <main class="game" aria-live="polite">
-    <header><div><p>临川经营志 · V5</p><h1>从一万到一百万</h1></div><button id="restart" type="button">重新开始</button></header>
+    <header><div><p>临川经营志 · V5.2</p><h1>从一万到一百万</h1></div><button id="restart" type="button">重新开始</button></header>
     <section id="progress" class="progress" aria-label="百万目标进度"></section>
     <section class="meta"><span id="year"></span><strong id="chapter"></strong></section>
     <section id="story" class="story"></section>
     <section id="choices" class="choices"></section>
-    <p class="save">进度会自动保留在这台设备中。V5 使用独立存档，不覆盖旧版本。</p>
+    <p class="save">进度会自动保留在这台设备中。V5.2 延续 V5 存档，并修正终局事件与人物关系分化。</p>
   </main>
-  <dialog id="start"><form method="dialog"><p>十年经营人生 · V5</p><h2>带着一万元，去临川。</h2><div class="intro">你不需要替角色算账。现金、库存、负债、信用、压力、人物关系和延迟后果会在故事背后真实运转；关键选择会改变几年后的事件、人物与结局。</div><label>主角名字<input id="name" maxlength="12" placeholder="输入名字"></label><button id="begin" value="default">进入临川</button></form></dialog>
-  <script src="v5.js"></script>
+  <dialog id="start"><form method="dialog"><p>十年经营人生 · V5.2</p><h2>带着一万元，去临川。</h2><div class="intro">你不需要替角色算账。现金、库存、负债、信用、压力、人物关系和延迟后果会在故事背后真实运转；关键选择会改变几年后的事件、人物与结局。</div><label>主角名字<input id="name" maxlength="12" placeholder="输入名字"></label><button id="begin" value="default">进入临川</button></form></dialog>
+  <script src="v5.js?v=52"></script>
+  <script src="v5.2-fixes.js?v=52"></script>
 </body>
 </html>
